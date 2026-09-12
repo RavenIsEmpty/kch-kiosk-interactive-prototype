@@ -1,73 +1,81 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#087f80">
-<title>KCH Health Kiosk — Interactive Prototype</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>KCH Kiosk — Interactive 3D Prototype</title>
+<meta name="theme-color" content="#0b7f81"/>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <style>
-:root{--teal:#087f80;--teal2:#12a8a1;--dark:#103638;--muted:#657a7d;--line:#dce8e7;--bg:#eef4f3;--card:#fff;--good:#2fa76f;--warn:#e3a52b;--danger:#d65c5c;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#edf4f3,#f7faf9);color:var(--dark)}button{font:inherit}.app{max-width:1500px;margin:auto;padding:16px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:12px}.mark{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#0b9d95,#066d73);color:#fff;font-weight:900;box-shadow:0 10px 28px #087f8030}.brand h1{font-size:20px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.pill{border:1px solid #cfe1df;border-radius:999px;padding:8px 11px;background:#fff;color:#496466;font-size:12px}.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 15px 48px rgba(30,66,66,.08);overflow:hidden}.stage{position:relative;min-height:700px;background:#e8eeee;user-select:none;touch-action:pan-y}.photoWrap{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}.photo{width:100%;height:100%;object-fit:contain;transition:opacity .22s ease,transform .28s ease;pointer-events:none}.fade{opacity:.15;transform:scale(.985)}.toolbar{position:absolute;z-index:5;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.tools{display:flex;gap:6px;flex-wrap:wrap;background:#ffffffdd;backdrop-filter:blur(10px);border:1px solid #d7e5e3;border-radius:14px;padding:6px;pointer-events:auto}.tools button{border:0;background:transparent;border-radius:10px;padding:8px 10px;cursor:pointer;color:#3f5e60}.tools button.active,.tools button:hover{background:#e2f3f1;color:#056e70}.hint{position:absolute;z-index:5;left:14px;bottom:14px;background:#173d3ee8;color:#fff;padding:9px 12px;border-radius:12px;font-size:12px}.hotspot{position:absolute;z-index:4;border:3px solid #18b9ae;border-radius:18px;box-shadow:0 0 0 8px #18b9ae25,0 0 28px #18b9ae75;opacity:0;pointer-events:none;transition:all .28s ease}.hotspot.on{opacity:1;animation:pulse 1.25s ease-in-out infinite}.hotspot.circle{border-radius:999px}@keyframes pulse{50%{box-shadow:0 0 0 14px #18b9ae12,0 0 36px #18b9ae95}}.beam{position:absolute;z-index:3;width:3px;background:linear-gradient(#19bfb400,#19bfb4,#19bfb400);filter:drop-shadow(0 0 7px #19bfb4);opacity:0;transition:.25s}.beam.on{opacity:.75;animation:beam 1.3s linear infinite}@keyframes beam{50%{filter:drop-shadow(0 0 14px #19d5c8)}}
-.panel{min-height:700px;display:flex;flex-direction:column}.panelHead{padding:18px;border-bottom:1px solid var(--line)}.panelHead h2{margin:0;font-size:18px}.panelHead p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.45}.content{padding:18px;display:flex;flex-direction:column;gap:13px;flex:1}.stepLine{display:flex;justify-content:space-between;align-items:center;gap:10px}.chip{font-size:12px;font-weight:800;color:#087f80;background:#e2f5f2;border-radius:999px;padding:7px 10px}.time{font-size:12px;color:#789091}.progress{height:8px;border-radius:999px;background:#e8efee;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,#078884,#25b8aa);border-radius:inherit;transition:width .3s ease}.title{margin:0;font-size:25px}.kh{margin:-6px 0 0;color:#0a7778;font-weight:700}.desc{margin:0;color:#526b6d;font-size:14px;line-height:1.58}.screenSim{border:1px solid #d8e7e5;border-radius:16px;background:linear-gradient(180deg,#f7fcfb,#eef8f6);padding:14px}.screenTop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.screenTop b{color:#087f80}.screenTag{font-size:11px;padding:5px 7px;border-radius:999px;background:#e2f4f1;color:#087f80}.screenBody{min-height:116px;border-radius:12px;background:#fff;border:1px solid #e0ecea;padding:13px;display:grid;place-items:center;text-align:center}.screenMain{font-weight:800;font-size:17px;color:#20484a}.screenSub{font-size:12px;color:#6d8384;margin-top:6px}.screenMetric{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;width:100%}.metric{padding:9px;border-radius:10px;background:#eff8f6;text-align:left}.metric small{display:block;color:#74898a}.metric strong{display:block;color:#087f80;margin-top:2px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.primary,.secondary{border-radius:13px;min-height:46px;font-weight:800;cursor:pointer}.primary{grid-column:1/-1;border:0;background:linear-gradient(135deg,#0a918b,#057078);color:#fff}.secondary{border:1px solid var(--line);background:#f9fcfb;color:#385456}.secondary:disabled{opacity:.45}.views{padding-top:4px;border-top:1px solid var(--line)}.views h3{font-size:12px;color:#5f7678;text-transform:uppercase;letter-spacing:.07em;margin:10px 0}.viewGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.thumb{padding:4px;border:1px solid #dbe7e6;background:#fff;border-radius:10px;cursor:pointer}.thumb.active{border-color:#078884;box-shadow:0 0 0 2px #07888418}.thumb img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:7px}.thumb span{font-size:10px;display:block;text-align:center;color:#587072;padding:4px 2px 1px}.status{padding:12px 18px;border-top:1px solid var(--line);background:#fbfdfd;color:#6c8182;font-size:12px}.footer{text-align:center;color:#6d8182;font-size:12px;margin-top:12px}
-@media(max-width:980px){.grid{grid-template-columns:1fr}.stage{min-height:560px}.panel{min-height:auto}.pill{display:none}}@media(max-width:600px){.app{padding:8px}.brand h1{font-size:16px}.brand p{font-size:12px}.mark{width:42px;height:42px}.stage{min-height:500px}.toolbar{top:8px;left:8px;right:8px}.tools{padding:4px;gap:2px}.tools button{font-size:11px;padding:8px}.hint{left:8px;right:8px;bottom:8px;text-align:center}.viewGrid{grid-template-columns:repeat(4,1fr)}.title{font-size:21px}}
+:root{--teal:#0b8586;--deep:#07565b;--bg:#f5f8f8;--ink:#173033;--muted:#6b7b7e;--card:#fff;--line:#dce7e8}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#f6f9f9,#eef4f4);color:var(--ink)}
+.shell{max-width:1420px;margin:auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:12px}.mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#17a6a4,#087477);display:grid;place-items:center;color:white;font-weight:800}.brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.badge{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:white;font-size:12px;color:var(--deep)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px}.viewer-card,.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden}.viewer-wrap{position:relative;min-height:720px;background:radial-gradient(circle at 45% 35%,#fff 0,#edf3f3 70%)}
+model-viewer{width:100%;height:720px;--poster-color:transparent;background:transparent}.controls{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.btn{border:1px solid rgba(10,88,92,.18);background:rgba(255,255,255,.92);backdrop-filter:blur(10px);color:var(--ink);padding:11px 14px;border-radius:14px;font-weight:650;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06)}.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}.btn:hover{transform:translateY(-1px)}
+.panel{padding:18px}.panel h2{margin:0 0 6px;font-size:19px}.panel .sub{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:14px}.step-list{display:grid;gap:9px}.step{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;border:1px solid var(--line);border-radius:16px;padding:11px;background:#fbfdfd;cursor:pointer}.step.active{border-color:#6bc4c2;background:#effafa;box-shadow:inset 0 0 0 1px #6bc4c2}.num{width:34px;height:34px;border-radius:11px;background:#e8f5f5;color:var(--deep);display:grid;place-items:center;font-weight:800}.step.active .num{background:var(--teal);color:#fff}.step b{font-size:14px}.step span{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:3px}.demo-box{margin-top:14px;padding:14px;border-radius:18px;background:linear-gradient(145deg,#0e666b,#0a4e53);color:white}.demo-title{font-weight:800;font-size:15px}.demo-text{opacity:.88;font-size:13px;line-height:1.5;margin-top:5px}.demo-actions{display:flex;gap:8px;margin-top:12px}.demo-actions button{flex:1;border:0;border-radius:12px;padding:10px;font-weight:700;cursor:pointer}.demo-actions .next{background:#fff;color:#0b5c61}.demo-actions .prev{background:rgba(255,255,255,.14);color:#fff}.specs{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.spec{background:#f7fafa;border-radius:12px;padding:10px}.spec small{display:block;color:var(--muted);font-size:10px}.spec strong{font-size:13px}.hotspot{display:none;border:0;background:transparent}.hotspot.visible{display:block}.pulse{width:20px;height:20px;border-radius:999px;background:#18c4bd;border:3px solid white;box-shadow:0 0 0 0 rgba(24,196,189,.6);animation:pulse 1.4s infinite}.label{margin-top:8px;transform:translateX(-45%);white-space:nowrap;background:rgba(8,71,76,.92);color:white;border-radius:10px;padding:7px 9px;font-size:12px;font-weight:700}@keyframes pulse{70%{box-shadow:0 0 0 16px rgba(24,196,189,0)}100%{box-shadow:0 0 0 0 rgba(24,196,189,0)}}
+.note{margin-top:12px;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.viewer-wrap,model-viewer{height:620px;min-height:620px}.panel{order:2}}
+@media(max-width:600px){.shell{padding:10px}.topbar{align-items:flex-start}.badge{display:none}.viewer-card,.panel{border-radius:18px}.viewer-wrap,model-viewer{height:510px;min-height:510px}.controls{left:8px;right:8px;bottom:8px}.btn{padding:9px 11px;font-size:12px}.panel{padding:14px}.step{padding:10px}.specs{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
-<div class="app">
-  <div class="top"><div class="brand"><div class="mark">KCH</div><div><h1>KCH Health Kiosk — Interactive Demo</h1><p>Prototype viewer + guided self-service workflow</p></div></div><div class="pill">Reliable demo V2 • no external 3D library</div></div>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand"><div class="mark">KCH</div><div><h1>KCH Health Kiosk — True 3D Prototype</h1><p>Rotate, zoom, inspect, and run the guided health-check demo.</p></div></div>
+    <div class="badge">Prototype V3 · GLB · Mobile & Laptop</div>
+  </div>
   <div class="grid">
-    <section class="card stage" id="stage">
-      <div class="photoWrap"><img id="mainPhoto" class="photo" src="kch-3quarter.png" alt="KCH health kiosk 3/4 view"></div>
-      <div id="hotspot" class="hotspot"></div><div id="hotspot2" class="hotspot"></div><div id="beam" class="beam"></div>
-      <div class="toolbar"><div class="tools" id="cameraTools"><button data-view="three" class="active">3/4</button><button data-view="front">Front</button><button data-view="right">Right</button><button data-view="back">Back</button></div><div class="tools"><button id="auto">Auto views</button><button id="reset">Reset</button></div></div>
-      <div class="hint">Drag / swipe left-right to change angle • Demo focuses the correct hardware automatically</div>
-    </section>
-    <aside class="card panel">
-      <div class="panelHead"><h2>How to use the machine</h2><p>Run the guided demo. Each step focuses the matching hardware area and updates the simulated kiosk screen.</p></div>
-      <div class="content">
-        <div class="stepLine"><span class="chip" id="stepNum">1 / 6</span><span class="time">concept: under 5 min</span></div>
-        <div class="progress"><span id="progress" style="width:16.67%"></span></div>
-        <h3 class="title" id="title">Welcome & Login</h3><p class="kh" id="kh">ចាប់ផ្តើម និងចូលប្រើ</p><p class="desc" id="desc">Tap the screen, scan a QR code, enter a phone number, or continue as guest.</p>
-        <div class="screenSim"><div class="screenTop"><b>KCH touchscreen</b><span class="screenTag" id="screenTag">READY</span></div><div class="screenBody" id="screenBody"></div></div>
-        <div class="controls"><button class="primary" id="start">▶ Start guided demo</button><button class="secondary" id="prev">Previous</button><button class="secondary" id="next">Next step</button></div>
-        <div class="views"><h3>Review angles</h3><div class="viewGrid" id="thumbs"></div></div>
+    <section class="viewer-card">
+      <div class="viewer-wrap">
+        <model-viewer id="viewer" src="KCH_Kiosk_True3D_V3.glb" poster="kch-reference.png" alt="Interactive 3D KCH health kiosk" camera-controls touch-action="pan-y" shadow-intensity="1.2" shadow-softness="0.8" exposure="1.05" environment-image="neutral" interpolation-decay="120" camera-orbit="35deg 72deg 3.4m" camera-target="0m 1.02m 0m" min-camera-orbit="auto 25deg 1.6m" max-camera-orbit="auto 95deg 5m">
+          <button class="hotspot" id="hs-screen" slot="hotspot-screen" data-position="0m 1.18m 0.17m" data-normal="0m 0m 1m"><div class="pulse"></div><div class="label">Touchscreen</div></button>
+          <button class="hotspot" id="hs-platform" slot="hotspot-platform" data-position="0m 0.08m 0.27m" data-normal="0m 1m 0m"><div class="pulse"></div><div class="label">Weight platform</div></button>
+          <button class="hotspot" id="hs-height" slot="hotspot-height" data-position="0m 1.98m 0.27m" data-normal="0m 0m 1m"><div class="pulse"></div><div class="label">Height sensor</div></button>
+          <button class="hotspot" id="hs-bp" slot="hotspot-bp" data-position="0.40m 1.09m 0.18m" data-normal="1m 0m 0m"><div class="pulse"></div><div class="label">Blood pressure</div></button>
+          <button class="hotspot" id="hs-glucose" slot="hotspot-glucose" data-position="0.29m 0.95m 0.19m" data-normal="1m 0m 0m"><div class="pulse"></div><div class="label">Optical glucose</div></button>
+          <button class="hotspot" id="hs-result" slot="hotspot-result" data-position="0.10m 0.87m 0.18m" data-normal="0m 0m 1m"><div class="pulse"></div><div class="label">QR / Receipt</div></button>
+        </model-viewer>
+        <div class="controls">
+          <button class="btn" data-view="front">Front</button><button class="btn" data-view="right">Right</button><button class="btn" data-view="back">Back</button><button class="btn" data-view="three">3/4</button><button class="btn" id="auto">Auto rotate</button><button class="btn primary" id="start">▶ Start Demo</button>
+        </div>
       </div>
-      <div class="status" id="status">Ready. Use the demo or switch viewing angles.</div>
+    </section>
+    <aside class="panel">
+      <h2>How to use the KCH kiosk</h2>
+      <div class="sub">Tap any step to move the 3D camera to the relevant hardware.</div>
+      <div class="step-list" id="steps"></div>
+      <div class="demo-box">
+        <div class="demo-title" id="demoTitle">Ready</div>
+        <div class="demo-text" id="demoText">Rotate the kiosk freely, or start the guided demonstration.</div>
+        <div class="demo-actions"><button class="prev" id="prev">← Previous</button><button class="next" id="next">Next →</button></div>
+      </div>
+      <div class="specs">
+        <div class="spec"><small>Overall height</small><strong>2120 mm</strong></div>
+        <div class="spec"><small>Body</small><strong>520 × 360 mm</strong></div>
+        <div class="spec"><small>Platform</small><strong>620 × 540 mm</strong></div>
+        <div class="spec"><small>Screen</small><strong>21.5” portrait</strong></div>
+      </div>
+      <div class="note">This is a true rotatable GLB prototype built from the frozen KCH geometry spec. It is for concept review, not manufacturing certification.</div>
     </aside>
   </div>
-  <div class="footer">Prototype for visual presentation and UX review. Final manufacturing CAD / validated medical hardware remains a later stage.</div>
 </div>
 <script>
-(()=>{
-const views={three:{src:'kch-3quarter.png',label:'3/4'},front:{src:'kch-front.png',label:'Front'},right:{src:'kch-right.png',label:'Right'},back:{src:'kch-back.png',label:'Back'}};
-const order=['three','front','right','back'];
-const stage=document.getElementById('stage'),photo=document.getElementById('mainPhoto'),hot=document.getElementById('hotspot'),hot2=document.getElementById('hotspot2'),beam=document.getElementById('beam');
-const title=document.getElementById('title'),kh=document.getElementById('kh'),desc=document.getElementById('desc'),stepNum=document.getElementById('stepNum'),progress=document.getElementById('progress'),screenBody=document.getElementById('screenBody'),screenTag=document.getElementById('screenTag'),status=document.getElementById('status');
-const start=document.getElementById('start'),prev=document.getElementById('prev'),next=document.getElementById('next'),auto=document.getElementById('auto'),reset=document.getElementById('reset');
-let currentView='three',step=0,playing=false,timer=null,autoViews=false,autoTimer=null,dragStart=null;
-const demo=[
-{t:'Welcome & Login',k:'ចាប់ផ្តើម និងចូលប្រើ',d:'Tap the screen, scan a QR code, enter a phone number, or continue as guest.',tag:'READY',main:'Welcome to KCH',sub:'Phone • QR • Guest',hot:[34,19,32,31]},
-{t:'Height & Weight',k:'វាស់កម្ពស់ និងទម្ងន់',d:'Stand naturally on both foot guides. The overhead sensor measures height while the platform measures weight.',tag:'MEASURING',main:'Stand on the footprints',sub:'Keep your body straight and still',hot:[29,74,42,18],hot2:[28,2,38,15],beam:true},
-{t:'Blood Pressure',k:'វាស់សម្ពាធឈាម',d:'Insert your right arm into the cuff and rest your forearm on the support tray. Keep still.',tag:'STEP 3',main:'Blood pressure',sub:'Right arm in cuff • keep still',hot:[68,36,25,19]},
-{t:'Optical Glucose',k:'វាស់ជាតិស្ករ',d:'Move the same hand to the optical sensor and place one fingertip flat on the illuminated pad.',tag:'STEP 4',main:'Optical glucose',sub:'Place fingertip on the sensor',hot:[61,46,13,13]},
-{t:'AI Analysis',k:'AI វិភាគលទ្ធផល',d:'The kiosk combines measurements, calculates BMI and risk level, then prepares personalized guidance.',tag:'ANALYZING',main:'AI health analysis',sub:'Combining your measurements…',hot:[35,18,30,34]},
-{t:'Results, QR & Receipt',k:'លទ្ធផល និងបង្កាន់ដៃ',d:'Review results, scan the QR health record, or print a receipt. The session clears after finishing.',tag:'COMPLETE',result:true,hot:[34,18,32,34]}
+const mv=document.getElementById('viewer');
+const steps=[
+ {title:'1. Welcome / Login',desc:'Tap the touchscreen and continue by phone number, QR code, or guest mode.',hot:'hs-screen',orbit:'0deg 72deg 2.55m',target:'0m 1.18m 0m'},
+ {title:'2. Height & Weight',desc:'Stand naturally on both foot guides. The platform reads weight while the overhead sensor measures height.',hot:'hs-platform',orbit:'18deg 72deg 2.85m',target:'0m 0.75m 0m'},
+ {title:'3. Height Sensor',desc:'Remain still while the overhead sensor measures vertically through the center of your standing position.',hot:'hs-height',orbit:'75deg 67deg 2.6m',target:'0m 1.72m 0m'},
+ {title:'4. Blood Pressure',desc:'Place your right arm into the cuff and rest your forearm on the support shelf.',hot:'hs-bp',orbit:'310deg 72deg 2.1m',target:'0.30m 1.06m 0m'},
+ {title:'5. Optical Glucose',desc:'After BP, place a fingertip on the optical sensor below the cuff. No finger-prick hardware.',hot:'hs-glucose',orbit:'315deg 72deg 2.0m',target:'0.25m 0.94m 0m'},
+ {title:'6. AI Result / QR / Receipt',desc:'Review the result on screen, scan the QR record, and print a receipt when needed.',hot:'hs-result',orbit:'5deg 72deg 2.45m',target:'0m 1.00m 0m'}
 ];
-function setView(v,quiet=false){if(!views[v])return;currentView=v;photo.classList.add('fade');setTimeout(()=>{photo.src=views[v].src;photo.alt='KCH kiosk '+views[v].label+' view';photo.classList.remove('fade');},120);document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));document.querySelectorAll('.thumb').forEach(b=>b.classList.toggle('active',b.dataset.view===v));if(!quiet)status.textContent=views[v].label+' view';if(step>=0)placeHotspots();}
-function place(el,a){if(!a){el.className='hotspot';el.style.cssText='';return}el.className='hotspot on';el.style.left=a[0]+'%';el.style.top=a[1]+'%';el.style.width=a[2]+'%';el.style.height=a[3]+'%';}
-function placeHotspots(){const s=demo[step];if(currentView!=='three'){place(hot,null);place(hot2,null);beam.classList.remove('on');return}place(hot,s.hot);place(hot2,s.hot2);if(s.beam){beam.style.left='45%';beam.style.top='11%';beam.style.height='66%';beam.classList.add('on')}else beam.classList.remove('on');}
-function screen(s){if(s.result){screenBody.innerHTML='<div class="screenMetric"><div class="metric"><small>Height</small><strong>168 cm</strong></div><div class="metric"><small>Weight</small><strong>62 kg</strong></div><div class="metric"><small>Blood pressure</small><strong>118/76</strong></div><div class="metric"><small>Glucose</small><strong>102 mg/dL</strong></div></div>';return}screenBody.innerHTML='<div><div class="screenMain">'+s.main+'</div><div class="screenSub">'+s.sub+'</div></div>'}
-function renderStep(i,automatic=false){step=Math.max(0,Math.min(demo.length-1,i));const s=demo[step];title.textContent=s.t;kh.textContent=s.k;desc.textContent=s.d;stepNum.textContent=(step+1)+' / '+demo.length;progress.style.width=((step+1)/demo.length*100)+'%';screenTag.textContent=s.tag;screen(s);prev.disabled=step===0;next.textContent=step===demo.length-1?'Restart':'Next step';setView('three',true);placeHotspots();status.textContent='Demo step '+(step+1)+': '+s.t;if(automatic&&playing)schedule()}
-function schedule(){clearTimeout(timer);if(step===demo.length-1){timer=setTimeout(()=>{playing=false;start.textContent='▶ Start guided demo'},4500);return}timer=setTimeout(()=>renderStep(step+1,true),4200)}
-start.onclick=()=>{if(playing){playing=false;clearTimeout(timer);start.textContent='▶ Resume demo';return}if(step===demo.length-1)step=0;playing=true;start.textContent='❚❚ Pause demo';renderStep(step,true)};
-prev.onclick=()=>{playing=false;clearTimeout(timer);start.textContent='▶ Start guided demo';renderStep(step-1)};next.onclick=()=>{playing=false;clearTimeout(timer);start.textContent='▶ Start guided demo';renderStep(step===demo.length-1?0:step+1)};
-reset.onclick=()=>{playing=false;clearTimeout(timer);start.textContent='▶ Start guided demo';renderStep(0);setView('three')};
-function stopAuto(){autoViews=false;clearInterval(autoTimer);auto.classList.remove('active');auto.textContent='Auto views'}
-auto.onclick=()=>{if(autoViews){stopAuto();return}autoViews=true;auto.classList.add('active');auto.textContent='Auto views: On';autoTimer=setInterval(()=>setView(order[(order.indexOf(currentView)+1)%order.length]),2500)};
-document.getElementById('cameraTools').onclick=e=>{if(e.target.dataset.view){stopAuto();setView(e.target.dataset.view)}};
-const thumbs=document.getElementById('thumbs');order.forEach(v=>{const b=document.createElement('button');b.className='thumb';b.dataset.view=v;b.innerHTML='<img src="'+views[v].src+'" alt="'+views[v].label+' thumbnail"><span>'+views[v].label+'</span>';b.onclick=()=>{stopAuto();setView(v)};thumbs.appendChild(b)});
-stage.addEventListener('pointerdown',e=>{dragStart=e.clientX});stage.addEventListener('pointerup',e=>{if(dragStart==null)return;const dx=e.clientX-dragStart;dragStart=null;if(Math.abs(dx)<35)return;stopAuto();let n=order.indexOf(currentView);n=(n+(dx<0?1:-1)+order.length)%order.length;setView(order[n])});
-renderStep(0);setView('three',true);
-})();
+const list=document.getElementById('steps'); let idx=-1;
+steps.forEach((s,i)=>{const el=document.createElement('div');el.className='step';el.innerHTML=`<div class="num">${i+1}</div><div><b>${s.title.replace(/^\d+\.\s*/,'')}</b><span>${s.desc}</span></div>`;el.onclick=()=>showStep(i);list.appendChild(el)});
+function clearHot(){document.querySelectorAll('.hotspot').forEach(x=>x.classList.remove('visible'))}
+function showStep(i){idx=Math.max(0,Math.min(steps.length-1,i));document.querySelectorAll('.step').forEach((e,j)=>e.classList.toggle('active',j===idx));clearHot();const s=steps[idx];document.getElementById(s.hot).classList.add('visible');mv.cameraOrbit=s.orbit;mv.cameraTarget=s.target;mv.jumpCameraToGoal();document.getElementById('demoTitle').textContent=s.title;document.getElementById('demoText').textContent=s.desc}
+document.getElementById('start').onclick=()=>showStep(0);document.getElementById('prev').onclick=()=>showStep(idx<=0?0:idx-1);document.getElementById('next').onclick=()=>showStep(idx<0?0:Math.min(steps.length-1,idx+1));
+const views={front:['0deg 72deg 3.0m','0m 1.05m 0m'],right:['-90deg 72deg 3.0m','0m 1.05m 0m'],back:['180deg 72deg 3.0m','0m 1.05m 0m'],three:['35deg 72deg 3.4m','0m 1.02m 0m']};document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{clearHot();const v=views[b.dataset.view];mv.cameraOrbit=v[0];mv.cameraTarget=v[1];mv.jumpCameraToGoal()});
+let rotating=false;document.getElementById('auto').onclick=(e)=>{rotating=!rotating;mv.autoRotate=rotating;e.currentTarget.textContent=rotating?'Stop rotation':'Auto rotate'};
 </script>
-</body></html>
+</body>
+</html>

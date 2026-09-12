@@ -1,9 +1,24 @@
-# KCH Interactive Demo V2
+# KCH Kiosk — True 3D Interactive Prototype V3
 
-This is a dependency-free presentation prototype for Netlify/Render.
+This package contains an actual rotatable GLB model plus a browser demo.
 
-## Why V2
-The previous V1 built a rough kiosk procedurally in Three.js and depended on an external CDN. V2 instead uses the approved photoreal reference views locally and adds guided hardware-demo interactions. It is not manufacturing CAD and not a true mesh, but it is reliable and visually much closer to the approved KCH design.
+## Files
+- `KCH_Kiosk_True3D_V3.glb` — real 3D model
+- `index.html` — interactive viewer and guided usage demo
+- `kch-reference.png` — photoreal visual target / poster
+- `screen_ui.png` — embedded KCH screen texture source
+- `netlify.toml` / `render.yaml` — deploy configs
 
-## Deploy
-Upload the contents of this folder to the GitHub repository root. Netlify/Render will redeploy automatically.
+## Local preview
+Run a static server in this folder, for example:
+`python -m http.server 8080`
+Then open `http://localhost:8080`.
+
+## Netlify
+Upload all files at repository root. No build command. Publish directory: `.`
+
+## Render
+Create Static Site from the same repository. Publish directory: `.`
+
+## Notes
+This is a concept prototype built from the frozen KCH hardware geometry. It aims to match the approved visual direction while staying light enough for browser/mobile use. It is not manufacturing-certified CAD.

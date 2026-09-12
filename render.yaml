@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: kch-kiosk-3d-demo
+    runtime: static
+    staticPublishPath: .

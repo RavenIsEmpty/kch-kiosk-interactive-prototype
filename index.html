@@ -1,81 +1,38 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>KCH Kiosk — Interactive 3D Prototype</title>
-<meta name="theme-color" content="#0b7f81"/>
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<style>
-:root{--teal:#0b8586;--deep:#07565b;--bg:#f5f8f8;--ink:#173033;--muted:#6b7b7e;--card:#fff;--line:#dce7e8}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#f6f9f9,#eef4f4);color:var(--ink)}
-.shell{max-width:1420px;margin:auto;padding:20px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:12px}.mark{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#17a6a4,#087477);display:grid;place-items:center;color:white;font-weight:800}.brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.badge{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:white;font-size:12px;color:var(--deep)}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px}.viewer-card,.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden}.viewer-wrap{position:relative;min-height:720px;background:radial-gradient(circle at 45% 35%,#fff 0,#edf3f3 70%)}
-model-viewer{width:100%;height:720px;--poster-color:transparent;background:transparent}.controls{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.btn{border:1px solid rgba(10,88,92,.18);background:rgba(255,255,255,.92);backdrop-filter:blur(10px);color:var(--ink);padding:11px 14px;border-radius:14px;font-weight:650;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.06)}.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}.btn:hover{transform:translateY(-1px)}
-.panel{padding:18px}.panel h2{margin:0 0 6px;font-size:19px}.panel .sub{color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:14px}.step-list{display:grid;gap:9px}.step{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;border:1px solid var(--line);border-radius:16px;padding:11px;background:#fbfdfd;cursor:pointer}.step.active{border-color:#6bc4c2;background:#effafa;box-shadow:inset 0 0 0 1px #6bc4c2}.num{width:34px;height:34px;border-radius:11px;background:#e8f5f5;color:var(--deep);display:grid;place-items:center;font-weight:800}.step.active .num{background:var(--teal);color:#fff}.step b{font-size:14px}.step span{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:3px}.demo-box{margin-top:14px;padding:14px;border-radius:18px;background:linear-gradient(145deg,#0e666b,#0a4e53);color:white}.demo-title{font-weight:800;font-size:15px}.demo-text{opacity:.88;font-size:13px;line-height:1.5;margin-top:5px}.demo-actions{display:flex;gap:8px;margin-top:12px}.demo-actions button{flex:1;border:0;border-radius:12px;padding:10px;font-weight:700;cursor:pointer}.demo-actions .next{background:#fff;color:#0b5c61}.demo-actions .prev{background:rgba(255,255,255,.14);color:#fff}.specs{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.spec{background:#f7fafa;border-radius:12px;padding:10px}.spec small{display:block;color:var(--muted);font-size:10px}.spec strong{font-size:13px}.hotspot{display:none;border:0;background:transparent}.hotspot.visible{display:block}.pulse{width:20px;height:20px;border-radius:999px;background:#18c4bd;border:3px solid white;box-shadow:0 0 0 0 rgba(24,196,189,.6);animation:pulse 1.4s infinite}.label{margin-top:8px;transform:translateX(-45%);white-space:nowrap;background:rgba(8,71,76,.92);color:white;border-radius:10px;padding:7px 9px;font-size:12px;font-weight:700}@keyframes pulse{70%{box-shadow:0 0 0 16px rgba(24,196,189,0)}100%{box-shadow:0 0 0 0 rgba(24,196,189,0)}}
-.note{margin-top:12px;color:var(--muted);font-size:11px;line-height:1.5}
-@media(max-width:980px){.grid{grid-template-columns:1fr}.viewer-wrap,model-viewer{height:620px;min-height:620px}.panel{order:2}}
-@media(max-width:600px){.shell{padding:10px}.topbar{align-items:flex-start}.badge{display:none}.viewer-card,.panel{border-radius:18px}.viewer-wrap,model-viewer{height:510px;min-height:510px}.controls{left:8px;right:8px;bottom:8px}.btn{padding:9px 11px;font-size:12px}.panel{padding:14px}.step{padding:10px}.specs{grid-template-columns:1fr 1fr}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#eef3f3" />
+  <title>KCH Kiosk — Premium 3D Prototype</title>
+  <style>
+    :root{--bg:#eef3f3;--panel:rgba(255,255,255,.86);--ink:#10343a;--muted:#607277;--teal:#0b8f91;--teal2:#20b7b2;--line:rgba(19,61,67,.14)}
+    *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#f6f9f9,#e7eeee);color:var(--ink)}
+    body{overflow-x:hidden}.app{max-width:1500px;margin:0 auto;padding:14px}.top{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:8px 4px 14px}.brand{display:flex;align-items:center;gap:11px}.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#087f80,#2cc5bc);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}.title{font-size:20px;font-weight:800;letter-spacing:-.02em}.sub{font-size:12px;color:var(--muted);margin-top:2px}.badge{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:12px;font-weight:700}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:stretch}.viewer{position:relative;min-height:720px;border-radius:26px;overflow:hidden;background:radial-gradient(circle at 50% 35%,#fff 0,#f1f5f5 43%,#dce5e6 100%);border:1px solid rgba(20,60,65,.12);box-shadow:0 18px 60px rgba(26,64,70,.12)}
+    #stage{position:absolute;inset:0}.hint{position:absolute;left:16px;top:16px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);font-size:12px;color:#486368;border:1px solid rgba(23,76,81,.10);pointer-events:none}.controls{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:7px;flex-wrap:wrap;justify-content:center;max-width:95%;padding:8px;border-radius:18px;background:rgba(19,45,50,.82);backdrop-filter:blur(14px);box-shadow:0 8px 24px rgba(7,26,30,.2)}button{appearance:none;border:0;font:inherit;cursor:pointer}.controls button{height:40px;padding:0 12px;border-radius:12px;color:#f3ffff;background:rgba(255,255,255,.08);font-weight:700;font-size:12px}.controls button:hover{background:rgba(255,255,255,.15)}.controls button.active{background:#13a7a4;color:white}.side{display:flex;flex-direction:column;gap:12px}.card{background:var(--panel);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:22px;padding:17px;box-shadow:0 12px 35px rgba(25,64,70,.08)}.card h2,.card h3{margin:0}.card h2{font-size:21px;letter-spacing:-.02em}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--teal);text-transform:uppercase;margin-bottom:7px}.desc{font-size:13px;line-height:1.55;color:var(--muted);margin:8px 0 0}.primary{width:100%;height:49px;border-radius:14px;background:linear-gradient(135deg,#07898c,#19b5af);color:white;font-weight:800;margin-top:14px;box-shadow:0 9px 20px rgba(9,146,146,.22)}.stephead{display:flex;align-items:center;justify-content:space-between;gap:8px}.stepno{font-size:12px;color:var(--muted)}.progress{height:6px;background:#e4eeee;border-radius:99px;overflow:hidden;margin:12px 0 14px}.progress i{display:block;height:100%;width:16.6%;background:linear-gradient(90deg,#087f80,#36c9be);border-radius:99px;transition:width .35s ease}.steptitle{font-size:18px;font-weight:850}.stepcopy{font-size:13px;line-height:1.55;color:var(--muted);min-height:63px;margin-top:6px}.nav{display:flex;gap:8px;margin-top:12px}.nav button{flex:1;height:42px;border-radius:12px;font-weight:750}.ghost{background:#edf4f4;color:#35545a}.next{background:#113d43;color:#fff}.specgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}.spec{padding:10px;border-radius:12px;background:rgba(239,246,246,.9)}.spec b{display:block;font-size:13px}.spec span{font-size:10px;color:#76878b}.refbox{position:absolute;right:16px;top:16px;width:200px;border-radius:16px;overflow:hidden;border:1px solid rgba(18,57,63,.14);box-shadow:0 8px 30px rgba(28,59,64,.15);background:white;display:none}.refbox.show{display:block}.refbox img{display:block;width:100%}.refbox div{font-size:10px;padding:7px 9px;color:#64767a;background:white}.loading{position:absolute;inset:0;display:grid;place-items:center;color:#587074;font-size:13px;pointer-events:none}.loading.hide{display:none}
+    @media(max-width:1050px){.layout{grid-template-columns:1fr}.viewer{min-height:650px}.side{display:grid;grid-template-columns:1fr 1fr}.side .card:last-child{grid-column:1/-1}}@media(max-width:700px){.app{padding:8px}.top{padding:6px 4px 10px}.badge{display:none}.layout{gap:9px}.viewer{min-height:560px;border-radius:19px}.side{display:flex}.controls{bottom:8px}.controls button{height:38px;padding:0 9px}.refbox{width:130px;right:8px;top:8px}.hint{left:8px;top:8px}.title{font-size:17px}}
+  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>
 </head>
 <body>
-<div class="shell">
-  <div class="topbar">
-    <div class="brand"><div class="mark">KCH</div><div><h1>KCH Health Kiosk — True 3D Prototype</h1><p>Rotate, zoom, inspect, and run the guided health-check demo.</p></div></div>
-    <div class="badge">Prototype V3 · GLB · Mobile & Laptop</div>
-  </div>
-  <div class="grid">
-    <section class="viewer-card">
-      <div class="viewer-wrap">
-        <model-viewer id="viewer" src="KCH_Kiosk_True3D_V3.glb" poster="kch-reference.png" alt="Interactive 3D KCH health kiosk" camera-controls touch-action="pan-y" shadow-intensity="1.2" shadow-softness="0.8" exposure="1.05" environment-image="neutral" interpolation-decay="120" camera-orbit="35deg 72deg 3.4m" camera-target="0m 1.02m 0m" min-camera-orbit="auto 25deg 1.6m" max-camera-orbit="auto 95deg 5m">
-          <button class="hotspot" id="hs-screen" slot="hotspot-screen" data-position="0m 1.18m 0.17m" data-normal="0m 0m 1m"><div class="pulse"></div><div class="label">Touchscreen</div></button>
-          <button class="hotspot" id="hs-platform" slot="hotspot-platform" data-position="0m 0.08m 0.27m" data-normal="0m 1m 0m"><div class="pulse"></div><div class="label">Weight platform</div></button>
-          <button class="hotspot" id="hs-height" slot="hotspot-height" data-position="0m 1.98m 0.27m" data-normal="0m 0m 1m"><div class="pulse"></div><div class="label">Height sensor</div></button>
-          <button class="hotspot" id="hs-bp" slot="hotspot-bp" data-position="0.40m 1.09m 0.18m" data-normal="1m 0m 0m"><div class="pulse"></div><div class="label">Blood pressure</div></button>
-          <button class="hotspot" id="hs-glucose" slot="hotspot-glucose" data-position="0.29m 0.95m 0.19m" data-normal="1m 0m 0m"><div class="pulse"></div><div class="label">Optical glucose</div></button>
-          <button class="hotspot" id="hs-result" slot="hotspot-result" data-position="0.10m 0.87m 0.18m" data-normal="0m 0m 1m"><div class="pulse"></div><div class="label">QR / Receipt</div></button>
-        </model-viewer>
-        <div class="controls">
-          <button class="btn" data-view="front">Front</button><button class="btn" data-view="right">Right</button><button class="btn" data-view="back">Back</button><button class="btn" data-view="three">3/4</button><button class="btn" id="auto">Auto rotate</button><button class="btn primary" id="start">▶ Start Demo</button>
-        </div>
+<div class="app">
+  <header class="top"><div class="brand"><div class="mark"></div><div><div class="title">KCH Health Kiosk</div><div class="sub">Premium true-3D interactive prototype</div></div></div><div class="badge">360° REAL-TIME 3D</div></header>
+  <main class="layout">
+    <section class="viewer">
+      <div id="stage"></div><div class="loading" id="loading">Loading premium 3D viewer…</div><div class="hint">Drag to rotate · Scroll/pinch to zoom</div>
+      <div class="refbox" id="refbox"><img src="approved-reference.png" alt="Approved KCH render reference"><div>Approved visual reference</div></div>
+      <div class="controls">
+        <button data-view="hero" class="active">3/4</button><button data-view="front">Front</button><button data-view="right">Right</button><button data-view="back">Back</button><button id="autoBtn">Auto Rotate</button><button id="refBtn">Reference</button><button id="resetBtn">Reset</button>
       </div>
     </section>
-    <aside class="panel">
-      <h2>How to use the KCH kiosk</h2>
-      <div class="sub">Tap any step to move the 3D camera to the relevant hardware.</div>
-      <div class="step-list" id="steps"></div>
-      <div class="demo-box">
-        <div class="demo-title" id="demoTitle">Ready</div>
-        <div class="demo-text" id="demoText">Rotate the kiosk freely, or start the guided demonstration.</div>
-        <div class="demo-actions"><button class="prev" id="prev">← Previous</button><button class="next" id="next">Next →</button></div>
-      </div>
-      <div class="specs">
-        <div class="spec"><small>Overall height</small><strong>2120 mm</strong></div>
-        <div class="spec"><small>Body</small><strong>520 × 360 mm</strong></div>
-        <div class="spec"><small>Platform</small><strong>620 × 540 mm</strong></div>
-        <div class="spec"><small>Screen</small><strong>21.5” portrait</strong></div>
-      </div>
-      <div class="note">This is a true rotatable GLB prototype built from the frozen KCH geometry spec. It is for concept review, not manufacturing certification.</div>
+    <aside class="side">
+      <section class="card"><div class="eyebrow">Interactive machine demo</div><h2>See how the kiosk works</h2><p class="desc">The camera moves to the active hardware while the touchscreen changes with each measurement step.</p><button class="primary" id="startDemo">▶ Start Guided Demo</button></section>
+      <section class="card"><div class="stephead"><div class="eyebrow" style="margin:0">Current step</div><div class="stepno" id="stepNo">1 / 6</div></div><div class="progress"><i id="progressBar"></i></div><div class="steptitle" id="stepTitle">Welcome & Login</div><div class="stepcopy" id="stepCopy">Tap the screen, enter your phone number or scan QR, or continue as a guest.</div><div class="nav"><button class="ghost" id="prevBtn">Previous</button><button class="next" id="nextBtn">Next</button></div></section>
+      <section class="card"><div class="eyebrow">Frozen concept geometry</div><div class="specgrid"><div class="spec"><b>2120 mm</b><span>overall height</span></div><div class="spec"><b>520 mm</b><span>body width</span></div><div class="spec"><b>360 mm</b><span>body depth</span></div><div class="spec"><b>620 × 540</b><span>standing platform</span></div><div class="spec"><b>21.5″</b><span>portrait display</span></div><div class="spec"><b>10°</b><span>backward tilt</span></div></div></section>
     </aside>
-  </div>
+  </main>
 </div>
-<script>
-const mv=document.getElementById('viewer');
-const steps=[
- {title:'1. Welcome / Login',desc:'Tap the touchscreen and continue by phone number, QR code, or guest mode.',hot:'hs-screen',orbit:'0deg 72deg 2.55m',target:'0m 1.18m 0m'},
- {title:'2. Height & Weight',desc:'Stand naturally on both foot guides. The platform reads weight while the overhead sensor measures height.',hot:'hs-platform',orbit:'18deg 72deg 2.85m',target:'0m 0.75m 0m'},
- {title:'3. Height Sensor',desc:'Remain still while the overhead sensor measures vertically through the center of your standing position.',hot:'hs-height',orbit:'75deg 67deg 2.6m',target:'0m 1.72m 0m'},
- {title:'4. Blood Pressure',desc:'Place your right arm into the cuff and rest your forearm on the support shelf.',hot:'hs-bp',orbit:'310deg 72deg 2.1m',target:'0.30m 1.06m 0m'},
- {title:'5. Optical Glucose',desc:'After BP, place a fingertip on the optical sensor below the cuff. No finger-prick hardware.',hot:'hs-glucose',orbit:'315deg 72deg 2.0m',target:'0.25m 0.94m 0m'},
- {title:'6. AI Result / QR / Receipt',desc:'Review the result on screen, scan the QR record, and print a receipt when needed.',hot:'hs-result',orbit:'5deg 72deg 2.45m',target:'0m 1.00m 0m'}
-];
-const list=document.getElementById('steps'); let idx=-1;
-steps.forEach((s,i)=>{const el=document.createElement('div');el.className='step';el.innerHTML=`<div class="num">${i+1}</div><div><b>${s.title.replace(/^\d+\.\s*/,'')}</b><span>${s.desc}</span></div>`;el.onclick=()=>showStep(i);list.appendChild(el)});
-function clearHot(){document.querySelectorAll('.hotspot').forEach(x=>x.classList.remove('visible'))}
-function showStep(i){idx=Math.max(0,Math.min(steps.length-1,i));document.querySelectorAll('.step').forEach((e,j)=>e.classList.toggle('active',j===idx));clearHot();const s=steps[idx];document.getElementById(s.hot).classList.add('visible');mv.cameraOrbit=s.orbit;mv.cameraTarget=s.target;mv.jumpCameraToGoal();document.getElementById('demoTitle').textContent=s.title;document.getElementById('demoText').textContent=s.desc}
-document.getElementById('start').onclick=()=>showStep(0);document.getElementById('prev').onclick=()=>showStep(idx<=0?0:idx-1);document.getElementById('next').onclick=()=>showStep(idx<0?0:Math.min(steps.length-1,idx+1));
-const views={front:['0deg 72deg 3.0m','0m 1.05m 0m'],right:['-90deg 72deg 3.0m','0m 1.05m 0m'],back:['180deg 72deg 3.0m','0m 1.05m 0m'],three:['35deg 72deg 3.4m','0m 1.02m 0m']};document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{clearHot();const v=views[b.dataset.view];mv.cameraOrbit=v[0];mv.cameraTarget=v[1];mv.jumpCameraToGoal()});
-let rotating=false;document.getElementById('auto').onclick=(e)=>{rotating=!rotating;mv.autoRotate=rotating;e.currentTarget.textContent=rotating?'Stop rotation':'Auto rotate'};
-</script>
+<script type="module" src="app.js"></script>
 </body>
 </html>

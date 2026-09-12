@@ -1,5 +1,5 @@
 services:
   - type: web
-    name: kch-kiosk-true3d
+    name: kch-kiosk-premium-3d
     runtime: static
     staticPublishPath: .
